@@ -4,7 +4,7 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Scilla',
+    title: 'Chapter 1: Scilla',
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
@@ -13,18 +13,18 @@ const FeatureList = [
     ),
   },
   {
-    title: 'ZilliqaJS',
+    title: 'Chapter 2: Zilliqa API & ZilliqaJS',
     Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        ZilliqaJS is a Javascript library which cotains various functions to interact with the Zilliqa blockchain.
+        ZilliqaJS is a Javascript library which contains various functions to interact with the Zilliqa blockchain. Underlying ZilliqaJS, the SDK calls Zilliqa API to interact with the blockchain.
         <br/> 
         Learn how to fetch contract state and invoke transitions.
       </>
     ),
   },
   {
-    title: 'React DApp Development',
+    title: 'Chapter 3: React DApp Development',
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>

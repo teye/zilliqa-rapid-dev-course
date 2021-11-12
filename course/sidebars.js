@@ -20,13 +20,17 @@ const sidebars = {
   tutorialSidebar: [
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Start Here',
       items: ['intro'],
     },
     {
       type: 'category',
-      label: 'Sciila',
-      items: ['scilla/intro'],
+      label: 'Chapter 1: Sciila',
+      items: [
+        'scilla/intro',
+        'scilla/maps',
+        'scilla/events_errors'
+      ],
     },
     {
       type: 'category',

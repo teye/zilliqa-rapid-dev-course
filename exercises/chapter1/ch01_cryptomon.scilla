@@ -1,0 +1,45 @@
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+library CryptoMons
+
+(* Global variables *)
+let zero = Uint256 0
+let one = Uint256 1
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract CryptoMons
+(
+    contract_owner: ByStr20
+)
+
+(* Mutable fields *)
+field owner: ByStr20 = contract_owner
+
+(* EXERCISE: add token_owners here *)
+
+field token_id_count: Uint256 = zero
+
+
+(* @dev: Mint new tokens *)
+transition Mint()
+  current_token_id <- token_id_count;
+  new_token_id_count = builtin add current_token_id one;
+  token_id_count := new_token_id_count
+  (* EXERCISE: complete this transition *)
+  (* mint a new token to _sender *)
+end
+
+(* @dev: Burn exisitng tokens *)
+transition Burn()
+  current_token_id <- token_id_count;
+  new_token_id_count = builtin sub current_token_id one;
+  token_id_count := new_token_id_count
+  (* EXERCISE: complete this transition *)
+  (* burn a token *)
+end

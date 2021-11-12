@@ -6,15 +6,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Zilliqa Rapid Dev Course',
-  tagline: 'Quick "Everything-You-Should-Know" on Zilliqa DApp Development',
+  title: 'Zilliqa TLDR DApp Course',
+  tagline: '"Everything-You-Should-Know" for Zilliqa DApp Development (TLDR)',
   url: 'https://teye.github.io',
-  baseUrl: '/zilliqa-rapid-dev-course/',
+  baseUrl: '/zilliqa-tldr-dapp-course/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'teye', // Usually your GitHub org/user name.
-  projectName: 'zilliqa-rapid-dev-course', // Usually your repo name.
+  projectName: 'zilliqa-tldr-dapp-course', // Usually your repo name.
   trailingSlash: false,
 
   presets: [
@@ -25,13 +25,13 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/teye/zilliqa-rapid-dev-course/',
+          editUrl: 'https://github.com/teye/zilliqa-tldr-dapp-course/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/teye/zilliqa-rapid-dev-course/',
+            'https://github.com/teye/zilliqa-tldr-dapp-course/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -67,7 +67,7 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} Zilliqa Rapid Dev Course, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Zilliqa TLDRDApp Course, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
