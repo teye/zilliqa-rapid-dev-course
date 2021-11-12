@@ -4,32 +4,33 @@ import styles from './HomepageFeatures.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Scilla',
     Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Scilla is the smart contract language in Zilliqa.<br/>Learn more about Maps, Events, Errors, Custom ADTs and Remote State Reads.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'ZilliqaJS',
     Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        ZilliqaJS is a Javascript library which cotains various functions to interact with the Zilliqa blockchain.
+        <br/> 
+        Learn how to fetch contract state and invoke transitions.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'React DApp Development',
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Combining the knowledge of Scilla and ZilliqaJS, understand how everything links together when developing a frontend framework.
+        <br/>
+        Learn how to fetch contract state and render on UI and invoke transitions via buttons.
       </>
     ),
   },
