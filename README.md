@@ -1,4 +1,4 @@
-# Zilliqa Rapid DApp Course
+# Zilliqa TLDR DApp Course
 This repo will introduce various SDK, tools, contract writing and workflow to get started with developing dApps on Zilliqa blockchain.
 
 **Note**
