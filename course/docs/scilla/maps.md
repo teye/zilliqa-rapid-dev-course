@@ -387,7 +387,8 @@ To summarize, for proper maps deletion in **nested maps**, we code our own `Dele
 
 The following are some exercises to help you be familiar with maps.
 
-Download this [skeleton contract code](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_marketplace.scilla) to get started.
+**Instructions**
+- Download this [marketplace contract](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_marketplace.scilla) to get started.
 
 **Task 1**
 - Define a new map `products` (`Uint256` -> `ByStr20`) that stores the mapping of `product_id` to users wallet addresses.
