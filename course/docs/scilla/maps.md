@@ -387,25 +387,25 @@ To summarize, for proper maps deletion in **nested maps**, we code our own `Dele
 
 The following are some exercises to help you be familiar with maps.
 
-Download this skeleton contract code to get started.
+Download this [skeleton contract code]() to get started.
 
 **Task 1**
-- Define a new map `token_owners` (`Uint256` -> `ByStr20`) that stores the mapping of `token_id` to users wallet addresses.
-- Define a new transition `Mint` that assigns a `token_id` to the `_sender` and updates the `token_owners` accordingly.
-- Define a new transition `Burn` that deletes the `token_id` from `token_owners`.
+- Define a new map `products` (`Uint256` -> `ByStr20`) that stores the mapping of `product_id` to users wallet addresses.
+- Define a new transition `AddItem` that assigns a `item_count` to the target address and updates the `products` accordingly.
+- Define a new transition `DeleteItem` that deletes the `item_id` from `products`.
 
 **Task 2**
 
-Deploy the contract on [Neo-Savant IDE](https://ide.zilliqa.com/) on **Testnet** and execute `Mint`. 
+Deploy the contract on [Neo-Savant IDE](https://ide.zilliqa.com/) on **Testnet** and execute `AddItem(wallet_address)`. 
 
-Once the transaction is confirmed, execute `Mint` a second time. 
+Once the transaction is confirmed, execute `AddItem(wallet_address)` a second time. 
 
-Look at the deployed contract state on **VuewBlock**.
+Look at the deployed contract state on **ViewBlock**.
 
 The contract state should look something like this:
 
 ```json
-token_owners : {
+products : {
     "1": "0x<wallet_address>",
     "2": "0x<wallet_address>",
 }
@@ -413,14 +413,14 @@ token_owners : {
 
 **Task 3**
 
-Return back to Neo-Savant IDE, execute `Burn` on `token_id` **1**. 
+Return back to Neo-Savant IDE, execute `DeleteItem` on `item_id` **1**. 
 
-Check the `token_owners` state again on ViewBlock.
+Check the `products` state again on ViewBlock.
 
 It should look like this:
 
 ```json
-token_owners : {
+products : {
     "2": "0x<wallet_address>",
 }
 ```
