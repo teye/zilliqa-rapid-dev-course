@@ -95,6 +95,76 @@ If a map is empty, the contract state would look like this:
   token_owners: {}
 ```
 
+## Improve Add / Delete Map Entries
+Now, we can improve the adding and deleting of map entries by putting additional checks.
+
+#### Add Map Example with Checks
+```
+  transition AddMap(id: Uint256, address: ByStr20)
+    owner <- token_owners[id];
+    match owner with
+    | Some existing_owner =>
+      (* owner already exists for this token_id; do nothing or throw error *)
+    | None =>
+      (* no such owner; proceed to add *)
+      token_owners[id] := address
+    end
+  end
+```
+
+First, we tried to fetch an owner for the `id` supplied by the user. Next we use the `match owner with` syntax to check whether any owner address is being fetched. The new item is added into the map only if the `id` is not already owned by anyone yet. If it is already owned, we do not want to overwrite the map.
+
+In other languages, the logic can be interpreted as such:
+
+```
+  const owner = token_owners[id];
+  if (owner !== undefined) {
+    // do nothing
+  } else {
+    // add to map
+    token_owners[id] = owner;
+  }
+```
+
+#### Delete Map Example with Checks
+```
+  transition DeleteMap(id: Uint256)
+    owner <- token_owners[id];
+    match owner with
+    | Some existing_owner =>
+      (* owner exists for this token_id; proceed to delete *)
+      delete token_owners[id]
+    | None =>
+      (* no such owner for this token_id to delete; throw error *)
+    end
+  end
+```
+
+Similar to the above add map example, first, we attempt to fetch an `owner` for this `id` that we wish to delete. Next. we check whether if this `owner` is undefined or not. If `owner` is undefined as shown by the `| None =>` branch, that implies the `id` does not exists in `token_owners` map. If `owner` is defined, then we proceed to delete the `id` from `token_owners`.
+
+In other languages, the logic can be interpeted as such:
+
+```
+  const owner = token_owners[id];
+  if (owner !== undefined) {
+    // delete from map
+    delete token_owners[id]
+  } else {
+    // throw error
+  }
+```
+
+<br/>
+
+:::info
+
+You might have noticed that we have added the comments "throw error" in the example code. 
+
+The topic on throwing errors and emiting events is covered in the next section [**Events & Errors**](./events_errors.md).
+
+:::
+
+
 <br/>
 <br/>
 
@@ -388,25 +458,25 @@ To summarize, for proper maps deletion in **nested maps**, we code our own `Dele
 The following are some exercises to help you be familiar with maps.
 
 **Instructions**
-- Download this [marketplace contract](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_marketplace.scilla) to get started.
+- Download this [**Cryptomon Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_cryptomon.scilla) to get started.
 
 **Task 1**
-- Define a new map `products` (`Uint256` -> `ByStr20`) that stores the mapping of `product_id` to users wallet addresses.
-- Define a new transition `AddItem` that assigns a `item_count` to the target address and updates the `products` accordingly.
-- Define a new transition `DeleteItem` that deletes the `item_id` from `products`.
+- Define a new map `token_owners` (`Uint256` -> `ByStr20`) that stores the mapping of `token_id` to users' wallet addresses.
+- Define a new transition `AddCryptoMon` that takes in `token_id` and `address` and add the new entry into the `token_owners` map.
+- Define a new transition `DeleteCryptoMon` that deletes a specific `token_id` from `token_owners`.
 
 **Task 2**
 
-Deploy the contract on [Neo-Savant IDE](https://ide.zilliqa.com/) on **Testnet** and execute `AddItem(wallet_address)`. 
+Deploy the contract on [Neo-Savant IDE](https://ide.zilliqa.com/) on **Testnet** and execute `AddCryptoMon(wallet_address)`. 
 
-Once the transaction is confirmed, execute `AddItem(wallet_address)` a second time. 
+Once the transaction is confirmed, execute `AddItem(wallet_address)` a second time with a different `token_id`. 
 
 Look at the deployed contract state on **ViewBlock**.
 
 The contract state should look something like this:
 
 ```json
-products : {
+token_owners : {
     "1": "0x<wallet_address>",
     "2": "0x<wallet_address>",
 }
@@ -414,14 +484,14 @@ products : {
 
 **Task 3**
 
-Return back to Neo-Savant IDE, execute `DeleteItem` on `item_id` **1**. 
+Return back to Neo-Savant IDE, execute `DeleteCryptoMon` on `token_id` - **1**. 
 
-Check the `products` state again on ViewBlock.
+Check the `token_owners` state again on ViewBlock.
 
 It should look like this:
 
 ```json
-products : {
+token_owners : {
     "2": "0x<wallet_address>",
 }
 ```

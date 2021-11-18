@@ -3,7 +3,7 @@ scilla_version 0
 (***************************************************)
 (*               Associated library                *)
 (***************************************************)
-library Marketplace
+library CryptoMon
 
 (* Global variables *)
 let zero = Uint256 0
@@ -13,7 +13,7 @@ let one = Uint256 1
 (*             The contract definition             *)
 (***************************************************)
 
-contract Marketplace
+contract CryptoMon
 (
     contract_owner: ByStr20
 )
@@ -21,23 +21,15 @@ contract Marketplace
 (* Mutable fields *)
 field owner: ByStr20 = contract_owner
 
-(* EXERCISE: add products here *)
-
-field item_count: Uint256 = zero
+(* EXERCISE: add token_owners here *)
 
 
 (* @dev: Add new item *)
-transition AddItem(address: ByStr20)
-  current_item_count <- item_count;
-  new_item_count = builtin add current_item_count one;
-  item_count := new_item_count
+transition AddCryptoMon(token_id: Uint256, address: ByStr20)
   (* EXERCISE: complete this transition *)
 end
 
 (* @dev: Delete exisitng item *)
-transition DeleteItem(item_id: Uint256)
-  current_item_count <- item_count;
-  new_item_count = builtin sub current_item_count one;
-  item_count := new_item_count
+transition DeleteCryptoMon(token_id: Uint256)
   (* EXERCISE: complete this transition *)
 end
