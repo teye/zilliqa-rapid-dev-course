@@ -1,0 +1,37 @@
+(* HelloWorld contract *)
+
+(***************************************************)
+(*                 Scilla version                  *)
+(***************************************************)
+
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+library HelloWorld
+
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract HelloWorld
+()
+
+
+procedure callC()
+  e = {_eventname: "callC"; msg: "I am a procedure call"};
+  event e
+end
+
+transition callA ()
+  e = {_eventname: "callB"; msg: "I am a transition call"};
+  event e
+end
+
+transition callB ()
+  callC;
+  e = {_eventname: "callB"; msg: "I am a transition call which invokes a procedure"};
+  event e
+end
