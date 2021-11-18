@@ -28,8 +28,11 @@ const sidebars = {
       label: 'Chapter 1: Sciila',
       items: [
         'scilla/intro',
+        'scilla/transitions_procedures',
         'scilla/maps',
-        'scilla/events_errors'
+        'scilla/events_errors',
+        'scilla/custom_adts',
+        'scilla/remote_state_reads'
       ],
     },
     {

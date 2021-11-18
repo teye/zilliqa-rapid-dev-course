@@ -30,4 +30,4 @@ Take a moment to go through the following in sequential order:
 4. [Development Environments](https://dev.zilliqa.com/docs/dev/dev-started-env)
 
 
-Once the above is completed, begin your journey with Chapter 1: Scilla.
+Once the above is completed, begin your journey with [**Chapter 1: Scilla**](./scilla/intro).

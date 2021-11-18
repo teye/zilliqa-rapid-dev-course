@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Scilla Introduction
 
-Scilla is the smart contract language in Zilliqa. This chapter will touch on **Maps**, **Events**, **Errors**, **Custom ADTs** and **Remote State Reads**.
+Scilla is the smart contract language in Zilliqa. This chapter will touch on  **Transitions**, **Procedures**, **Maps**, **Events**, **Errors**, **Custom ADTs** and **Remote State Reads**.
 
 The above is not a comphrensive list. See https://scilla.readthedocs.io/en/latest/ and https://scilla.readthedocs.io/_/downloads/en/latest/pdf/ for more details.
 
