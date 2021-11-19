@@ -42,5 +42,123 @@ An example of invoking the transition `demoB` looks like this on Devex Zilliqa u
 ![Devex Zilliqa Emit Event](./screenshots/events.png)
 
 ## Errors
+In Scilla, learning how to throw errors is also essential to contract writing. Frequently, we would have some checks and depending on the result of the checks, we would proceed to do something or throw an error to halt the contract execution.
+
+#### Syntax
+```
+scilla_version 0
+
+library DemoError
+
+(* Error events *)
+type Error =
+| CodeNotOwner
+| CodeNotFound
+| CodeAlreadyExists
+
+(* Library function that maps Error to a error code *)
+let make_error =
+  fun (result : Error) =>
+    let result_code =
+      match result with
+      | CodeNotOwner       => Int32 -1
+      | CodeNotFound       => Int32 -2
+      | CodeAlreadyExists  => Int32 -3
+      end
+    in
+    { _exception : "Error"; code : result_code }
+
+
+contract DemoError()
+
+field products : Map Uint128 String : Emp Uint128 String
+
+(* Emit Errors *)
+procedure ThrowError(err : Error)
+  e = make_error err;
+  throw e
+end
+
+transition AddItem(id: Uint128, name: String)
+  product_name <- products[id];
+  match product_name
+  | Some existing_product =>
+    (* item already exists; throw error *)
+    err = CodeAlreadyExists;
+    ThrowError err
+  | None =>
+    (* no existing item; proceed to add to map *)
+    products[id] := name
+  end
+end
+```
+
+In the above transition `AddItem()`, it checks if the item already eixsts for the specific id, if so we throw a `CodeAlreadyExists` error. Otherwise, we add the item into the map.
+
+Let's take a look at how the error is declared and thrown.
+
+```
+(* Error events *)
+type Error =
+| CodeNotOwner
+| CodeNotFound
+| CodeAlreadyExists
+
+(* Library function that maps Error to a error code *)
+let make_error =
+  fun (result : Error) =>
+    let result_code =
+      match result with
+      | CodeNotOwner       => Int32 -1
+      | CodeNotFound       => Int32 -2
+      | CodeAlreadyExists  => Int32 -3
+      end
+    in
+    { _exception : "Error"; code : result_code }
+```
+
+First, we declare a **Custom ADT** (Custom Abstract Data Type) which is something like a custom object that defines an `Error` object. Our custom `Error` object has 3 attributes or definitions that determines what error type we can throw. The error type namings can be any names and has no limits to the number of errors that can be defined.
+
+Next, we defined a library function `make_error` which maps our `Error` types into a `Int32` number and also outputs the mapping into the form `{_exception : "Error"; code : result_code }`.
+
+We can think of this library function like a Javascript JSON, e.g.
+```
+  {
+    CodeNotOwner : -1,
+    CodeNotFound : -2,
+    CodeAlreadyExists : -3,
+  }
+```
+
+This mapping allow us to compare errors easily and also makes it easier to read in transaction outputs. In the example, we have used a negative number. There isn't a strict rule to use a negative number for error codes, positive numbers are also allowed as well.
+
+Next, we have a procedure `ThrowError(err : Error)` that takes in our error code, calls our `make_error` library and throws an exception via the keyword `throw`.
+
+```
+procedure ThrowError(err : Error)
+  e = make_error err;
+  throw e
+end
+```
+
+Finally, we can invoke this procedure from a transition or another procedure calls by declaring the error type `(err = <OurSelfDefinedErrorType>)` and calling the `ThrowError err`.
+
+```
+transition TestError()
+  err = CodeNotFound;
+  ThrowError err
+end
+```
+
+To view the errors output, we can view the transaction state on blockchain explorer such as [**Devex Zilliqa**](https://devex.zilliqa.com) and [**ViewBlock**](https://viewblock.io/zilliqa).
+
+An example of invoking the transition `TesetError` looks like this on Devex Zilliqa under "Event Logs" section:
+
+![Devex Zilliqa Throw Error](./screenshots/errors.png)
 
 ## Exercises
+
+The following are some exercises to help you be familiar with events and procedures.
+
+**Instructions**
+- Download this [**CryptoMon Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_events_errors.scilla) to get started.
