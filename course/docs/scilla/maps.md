@@ -467,7 +467,7 @@ The following are some exercises to help you be familiar with maps.
 
 **Task 2**
 
-Deploy the contract on [Neo-Savant IDE](https://ide.zilliqa.com/) on **Testnet** and execute `AddCryptoMon(wallet_address)`. 
+Deploy the contract on [**Neo-Savant IDE**](https://ide.zilliqa.com/) on **Testnet** and execute `AddCryptoMon(wallet_address)`. 
 
 Once the transaction is confirmed, execute `AddItem(wallet_address)` a second time with a different `token_id`. 
 

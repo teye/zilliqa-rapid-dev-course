@@ -161,6 +161,44 @@ An example of invoking the transition `TesetError` looks like this on Devex Zill
 The following are some exercises to help you be familiar with events and procedures.
 
 **Instructions**
-- Download this [**CryptoMon Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_events_errors.scilla) to get started.
+- Download this [**CryptoMon Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_cryptomon_events_errors.scilla) to get started.
 
-****
+<br/>
+
+**Task 1: Events**
+- Add checks to `AddCryptoMon()` such that we only add the new `token_id` if the `token_id` is a new entry. 
+  - After we have added the new `token_id` into the map, emit an event `e = {_eventname: "AddCryptoMon"; token_id: token_id; owner: address}`
+  - If the `token_id` already exists, we do nothing for now.
+- Add checks to `DeleteCryptoMon()` such that we only delete the `token_id` if the `token_id` exists. 
+  - After we have deleted the `token_id` from the map, emit an event `e = {_eventname: "DeleteCryptoMon; token_id: token_id"}`
+  - If the `token_id` does not exist, we do nothing for now.
+
+<br/>
+
+**Task 2: Errors**
+
+Continuing from the previous tasks, recall that there are some portions of the checks for `AddCryptoMon` and `DeleteCryptoMon` which we do nothing? Now, we are going to throw an error for these checks.
+- Create a `type Error` and defined two types: (1) `CodeCryptoMonNotExists` and (2) `CodeCryptoMonAlreadyExists`.
+- Create the `make_error` library function and assigned the above codes to a `Int32` number of your choice.
+- Create a `ThrowError` procedure that takes in the `Error` type and calls `make_error` and throw the error exception.
+- Edit the transition `AddCryptoMon` to throw `CodeCryptoMonAlreadyExists` if we try to add a `token_id` that already existed in the map.
+- Edit the transition `DeleteCryptoMon` to throw `CodeCryptoMonNotExists` if we try to delete a `token_id` that is not present in the map.
+
+<br/>
+
+**Task 3: Testing**
+
+- Deploy the contract on  [**Neo-Savant IDE**](https://ide.zilliqa.com/) on **Simulated Env**.
+- Execute `AddCryptoMon(1, <your_wallet_address>)`.
+  - Observe the transaction output.
+  - The event `AddCryptoMon, token_id: 1, owner: <wallet_address>` shoud be emitted.
+- Execute `AddCryptoMon(1, <your_wallet_address>)` again.
+  - Observe the transaction output.
+  - The error `CodeCryptoMonAlreadyExists` should be thrown.
+- Execute `DeleteCryptoMon(1)`.
+  - Observe the transaction output.
+  - The event `DeleteCryptoMon, token_id: 1` shoud be emitted.
+- Execute `DeleteCryptoMon(1)` again.
+  - Observe the transaction output.
+  - The error `CodeCryptoMonNotExists` should be thrown.
+

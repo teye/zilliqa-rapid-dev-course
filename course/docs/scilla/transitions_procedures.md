@@ -73,7 +73,7 @@ The following are some exercises to help you be familiar with transitions and pr
 - Download this [**HelloWorld Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_transitions_procedures.scilla) to get started.
 
 **Task**
-- Deploy the contract on  [Neo-Savant IDE](https://ide.zilliqa.com/) on **Simulated Env**.
+- Deploy the contract on  [**Neo-Savant IDE**](https://ide.zilliqa.com/) on **Simulated Env**.
 - Execute `callA()` and observe the transaction event logs.
 - Execute `callB()` and observe the transaction event logs.
 - You should notice that for `callB()`, there are additional event logs due to `callC()`. 
