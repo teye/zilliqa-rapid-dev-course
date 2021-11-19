@@ -152,7 +152,7 @@ end
 
 To view the errors output, we can view the transaction state on blockchain explorer such as [**Devex Zilliqa**](https://devex.zilliqa.com) and [**ViewBlock**](https://viewblock.io/zilliqa).
 
-An example of invoking the transition `TesetError` looks like this on Devex Zilliqa under "Event Logs" section:
+An example of invoking the transition `TesetError` looks like this on Devex Zilliqa under "Exceptions" section:
 
 ![Devex Zilliqa Throw Error](./screenshots/errors.png)
 
@@ -162,3 +162,5 @@ The following are some exercises to help you be familiar with events and procedu
 
 **Instructions**
 - Download this [**CryptoMon Contract**](https://github.com/teye/zilliqa-tldr-dapp-course/blob/main/exercises/chapter1/ch01_events_errors.scilla) to get started.
+
+****
