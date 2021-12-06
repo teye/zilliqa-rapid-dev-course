@@ -3,7 +3,7 @@ sidebar_position: 4
 ---
 
 # Events & Errors
-In some of the eariler topics, we already saw some events outputs. In this section, we are going to properly introduce Scilla events and how to throw errors exception.
+In some of the eariler topics, we already saw some events outputs. In this section, we are going to introduce Scilla events and how to throw errors exception in greater details.
 
 ## Events
 A Scilla event is an output of a function call. Normally, we used it to output mutable field values after updating them. Scilla events can be read from the blockchain transaction receipt.

@@ -6,10 +6,10 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Zilliqa TLDR DApp Course',
+  title: 'TLDR Zilliqa DApp Course',
   tagline: '"Everything-You-Should-Know" for Zilliqa DApp Development (TLDR)',
   url: 'https://teye.github.io',
-  baseUrl: '/zilliqa-tldr-dapp-course/',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -67,7 +67,7 @@ const config = {
       footer: {
         style: 'dark',
         links: [],
-        copyright: `Copyright © ${new Date().getFullYear()} Zilliqa TLDRDApp Course, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()}. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

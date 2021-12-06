@@ -1,0 +1,38 @@
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+library CryptoMon
+
+(* EXERCISE: define your custom ADT below this line *)
+
+(* Global variables *)
+let zero = Uint256 0
+let one = Uint256 1
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract CryptoMon
+(
+    contract_owner: ByStr20
+)
+
+(* Mutable fields *)
+field owner: ByStr20 = contract_owner
+
+(* EXERCISE: create a new map to record the cryptomon details *)
+
+(* EXERCISE: complete the following transition *)
+(* @dev: Add new cryptomon *)
+transition AddCryptoMon(cryptomon_id: Uint256, name: String, age: Uint128, height: Uint128, level: Uint128)
+  (* add the cryptomon details to the map *)
+end
+
+(* EXERCISE: complete the following transition *)
+(* @dev: Delete exisitng cryptomon *)
+transition DeleteCryptoMon(cryptomon_id: Uint256)
+  (* delete this particular cryptomon *)
+end
