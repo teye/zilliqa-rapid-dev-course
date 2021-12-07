@@ -128,6 +128,6 @@ The following are some exercises to help you be familiar with remote state reads
   - Observe the transaction logs for events.
   - You should see error `-1` which is `CodeNotTokenOwner` being thrown.
   - This implies our remote state read is working as intended.
-- Switch back the wallet address which executes `AddCryptoMon(1)` and call `CreateTrade(1, 100)` in the **Marketplace** contract.
+- Switch back the **original** wallet address which executes `AddCryptoMon(1)` and call `CreateTrade(1, 100)` in the **Marketplace** contract.
   - Observe the transaction logs for events.
   - You should see a `CreateTrade` event being emitted.
