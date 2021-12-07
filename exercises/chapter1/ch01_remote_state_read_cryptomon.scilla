@@ -1,0 +1,46 @@
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+library CryptoMon
+
+(* Global variables *)
+let zero = Uint256 0
+let one = Uint256 1
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract CryptoMon
+(
+    contract_owner: ByStr20
+)
+
+(* Mutable fields *)
+field owner: ByStr20 = contract_owner
+
+field token_owners: Map Uint256 ByStr20 = Emp Uint256 ByStr20
+
+
+(* @dev: Add new item *)
+transition AddCryptoMon(token_id: Uint256, address: ByStr20)
+  token_owners[token_id] := address;
+  e = {
+    _eventname : "AddCryptoMon";
+    token_id: token_id;
+    owner: address
+  };
+  event e
+end
+
+(* @dev: Delete exisitng item *)
+transition DeleteCryptoMon(token_id: Uint256)
+  delete token_owners[token_id];
+  e = {
+    _eventname : "DeleteCryptoMon";
+    token_id: token_id
+  };
+  event e
+end

@@ -1,0 +1,109 @@
+scilla_version 0
+
+(***************************************************)
+(*               Associated library                *)
+(***************************************************)
+library Marketplace
+
+let zero_address = 0x0000000000000000000000000000000000000000
+
+let option_value =
+  tfun 'A =>
+  fun (default: 'A) =>
+  fun (opt_val: Option 'A) =>
+    match opt_val with
+    | Some v => v
+    | None => default
+    end
+    
+let option_address = @option_value ByStr20
+
+(* Error exceptions *)
+type Error =
+  | CodeNotTokenOwner
+  | CodeTradeAlreadyExists
+  | CodeTradeNotExists
+
+let make_error =
+  fun (result : Error) =>
+    let result_code = 
+      match result with
+      | CodeNotTokenOwner            => Int32 -1
+      | CodeTradeAlreadyExists       => Int32 -2
+      | CodeTradeNotExists           => Int32 -3
+      end
+    in
+    { _exception : "Error"; code : result_code }
+
+(***************************************************)
+(*             The contract definition             *)
+(***************************************************)
+
+contract Marketplace
+(
+    contract_owner: ByStr20,
+    cryptomons: ByStr20 with contract
+      field token_owners: Map Uint256 ByStr20
+    end
+)
+
+(* Mutable fields *)
+field owner: ByStr20 = contract_owner
+
+(* token_id -> price *)
+field trades: Map Uint256 Uint128 = Emp Uint256 Uint128
+
+(* Procedures *)
+procedure ThrowError(err : Error)
+  e = make_error err;
+  throw e
+end
+
+(* @dev: add new cryptomon for trade *)
+transition CreateTrade(token_id: Uint256, price: Uint128)
+  some_address <-& cryptomons.token_owners[token_id];
+  existing_owner = option_address zero_address some_address;
+  is_owner = builtin eq _sender existing_owner;
+  
+  match is_owner with
+  | True =>
+    some_trade <- trades[token_id];
+    match some_trade with
+    | Some existing_trade =>
+      (* trade already exists for this token_id *)
+      err = CodeTradeAlreadyExists;
+      ThrowError err
+    | None =>
+      (* no such trade for this token_id *)
+      trades[token_id] := price;
+      e = {
+        _eventname : "CreateTrade";
+        token_id: token_id;
+        price: price
+      };
+      event e
+    end
+  | False =>
+    err = CodeNotTokenOwner;
+    ThrowError err
+  end
+end
+
+(* @dev: accept the trade *)
+transition AcceptTrade(token_id: Uint256)
+  some_trade <- trades[token_id];
+  match some_trade with
+  | Some existing_price =>
+    (* note: for simplicity, we did not code the logic to transfer token ownerships *)
+    delete trades[token_id];
+    e = {
+      _eventname : "AcceptTrade";
+      token_id: token_id;
+      price: existing_price
+    };
+    event e
+  | None =>
+    err = CodeTradeNotExists;
+    ThrowError err
+  end
+end
