@@ -246,8 +246,7 @@ const { Zilliqa } = require('@zilliqa-js/zilliqa');
 async function main() {
     const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
     const myContractAddress = '0x_base16_address';
-    const base16NoHex = myContractAddress.replace("0x", "");
-    
+
     const owners = await zilliqa.blockchain.getSmartContractSubState(
         `${myContractAddress}`,
         'token_owners',
@@ -267,8 +266,221 @@ Next we invoke `zilliqa.blockchain.getSmartContractSubState` to fetch the `token
 
 The following are some exercises to help you be familiar with Zilliqa JS.
 
+**Instructions**
+
+Download these [files](https://github.com/teye/zilliqa-tldr-dapp-course/tree/main/exercises/chapter2) into a folder.
+
+<br/>
+
 **Task 1: Deploy a Contract**
+
+For this task, we are going to deploy a `Cryptomon` contract using Zilliqa JS.
+
+Download the required fileds and open up `deploy.js`.
+
+Edit the `privateKey` to your own wallet private key:
+
+```javascript
+let api = 'https://dev-api.zilliqa.com';
+const privateKey = 'wallet-privatekey';
+
+const zilliqa = new Zilliqa(api);
+```
+
+Open a terminal, change to the **chapter2** folder, execute these statements to deploy the contract, wait for it to complete: 
+
+```
+npm install
+node deploy.js
+```
+
+Your output should look something like this:
+
+```json
+networkid: '333'
+{
+    "code": "scilla_version 0\n\n(***************************************************)\n(*               Associated library                *)\n(***************************************************)\nlibrary CryptoMon\n\n(* Global variables *)\nlet zero = Uint256 0\nlet one = Uint256 1\n\n(***************************************************)\n(*             The contract definition             *)\n(***************************************************)\n\ncontract CryptoMon\n(\n    contract_owner: ByStr20\n)\n\n(* Mutable fields *)\nfield owner: ByStr20 = contract_owner\n\nfield token_owners: Map Uint256 ByStr20 = Emp Uint256 ByStr20\n\n\n(* @dev: Add new item *)\ntransition AddCryptoMon(token_id: Uint256, address: ByStr20)\n  token_owners[token_id] := address;\n  e = {\n    _eventname : \"AddCryptoMon\";\n    token_id: token_id;\n    owner: address\n  };\n  event e\nend\n\n(* @dev: Delete exisitng item *)\ntransition DeleteCryptoMon(token_id: Uint256)\n  delete token_owners[token_id];\n  e = {\n    _eventname : \"DeleteCryptoMon\";\n    token_id: token_id\n  };\n  event e\nend\n",
+    "data": "[{\"vname\":\"_scilla_version\",\"type\":\"Uint32\",\"value\":\"0\"},{\"vname\":\"contract_owner\",\"type\":\"ByStr20\",\"value\":\"0x<your_wallet_address>\"}]",
+    "version": 21823489,
+    "toAddr": "0x0000000000000000000000000000000000000000",
+    "nonce": 30,
+    "pubKey": "<public_key>",
+    "amount": "0",
+    "signature": "<signature>",
+    "gasPrice": "77359400",
+    "gasLimit": {
+        "low": 30000,
+        "high": 0,
+        "unsigned": false
+    },
+    "receipt": {
+        "cumulative_gas": 401,
+        "epoch_num": "3582320",
+        "success": true
+    },
+    "provider": {
+        "middleware": {
+            "request": {},
+            "response": {}
+        },
+        "nodeURL": "https://dev-api.zilliqa.com",
+        "reqMiddleware": {},
+        "resMiddleware": {}
+    },
+    "status": 2,
+    "toDS": false,
+    "blockConfirmation": 0,
+    "eventEmitter": {
+        "handlers": {},
+        "emitter": {},
+        "promise": {}
+    },
+    "id": "<transaction_hash>"
+}
+contract address: '0x<contract_address>'
+```
+
+Take note of the contract address, it would be used for later tasks.
+
+<br/>
 
 **Task 2: Call a Transition**
 
+For this task, we are going to call the `AddCryptoMon(1, <your-wallet-address>)` transition on our deployed contract using Zilliqa JS.
+
+Download the required fileds and open up `call.js`.
+
+Edit the `privateKey` to your own wallet private key and `cryptomonAddr` to the deployed contract address from **Task 1**:
+
+```javascript
+const privateKey = '<wallet-privatekey>';
+const tokenId = '1';
+
+const cryptomonAddr = '0x<contract_addr>';
+```
+
+Open a terminal, change to the **chapter2** folder, execute this to call `AddCryptoMon`, wait for it to complete: 
+
+```
+node call.js
+```
+
+Your output should look like this:
+
+```json
+networkid: '333'
+{
+    "code": "",
+    "data": "{\"_tag\":\"AddCryptoMon\",\"params\":[{\"vname\":\"token_id\",\"type\":\"Uint256\",\"value\":\"1\"},{\"vname\":\"address\",\"type\":\"ByStr20\",\"value\":\"0x<wallet_address>\"}]}",
+    "version": 21823489,
+    "toAddr": "0x<contract_address>",
+    "nonce": 32,
+    "pubKey": "<public_key>",
+    "amount": "0",
+    "signature": "<transaction_signature>",
+    "gasPrice": "77359400",
+    "gasLimit": {
+        "low": 10000,
+        "high": 0,
+        "unsigned": false
+    },
+    "receipt": {
+        "accepted": false,
+        "cumulative_gas": 368,
+        "epoch_num": "3582369",
+        "event_logs": [
+            {
+                "_eventname": "AddCryptoMon",
+                "address": "0x<contract_address>",
+                "params": [
+                    {
+                        "type": "Uint256",
+                        "value": "1",
+                        "vname": "token_id"
+                    },
+                    {
+                        "type": "ByStr20",
+                        "value": "0x<wallet_address>",
+                        "vname": "owner"
+                    }
+                ]
+            }
+        ],
+        "success": true
+    },
+    "provider": {
+        "middleware": {
+            "request": {},
+            "response": {}
+        },
+        "nodeURL": "https://dev-api.zilliqa.com",
+        "reqMiddleware": {},
+        "resMiddleware": {}
+    },
+    "status": 2,
+    "toDS": false,
+    "blockConfirmation": 0,
+    "eventEmitter": {
+        "handlers": {},
+        "emitter": {},
+        "promise": {}
+    },
+    "id": "<transaction_hash>"
+}
+```
+
+Open the file and observe how the transition parameters are crafted when comparing it to the contract code.
+
+<br/>
+
 **Task 3: Fetch Contract State**
+
+In Task 1, we deployed a sample `Cryptomon` contract. In Task 2, we called `AddCryptoMon` to create `token_id` 1 into our own wallet.
+
+For this task, we are going to fetch a `token_owners` mutable field from our deployed contract using Zilliqa JS.
+
+Download the required fileds and open up `fetch.js`.
+
+Edit `cryptomonAddr` to point to your deployed contract address.
+
+```javascript
+const zilliqa = new Zilliqa('https://dev-api.zilliqa.com');
+const cryptomonAddr = '0x_contract_address';
+```
+
+Open a terminal, change to the **chapter2** folder, execute this fetch `token_owners`, wait for it to complete: 
+
+```
+node fetch.js
+```
+
+Your output should look like this:
+
+```json
+token owners:  {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "token_owners": {
+            "1": "0x<wallet_address>"
+        }
+    },
+    "req": {
+        "url": "https://dev-api.zilliqa.com",
+        "payload": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "method": "GetSmartContractSubState",
+            "params": [
+                "<contract_address>",
+                "token_owners",
+                []
+            ]
+        }
+    }
+}
+```
+
+That's it for these exercises!
+
+To learn more, you may edit `call.js`'s `tokenId` variable and execute `AddCryptoMon`. After which, call `fetch.js` and observe the `token_owners` field. Try it out and experiment! You may also edit `call.js` to call `DeleteCryptoMon`!
