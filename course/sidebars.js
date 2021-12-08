@@ -37,8 +37,11 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'ZilliqaJS',
-      items: ['intro'],
+      label: 'Chapter 2: Zilliqa API & ZilliqaJS',
+      items: [
+        'zilliqa-js/api',
+        'zilliqa-js/javascript',
+      ],
     },
     {
       type: 'category',

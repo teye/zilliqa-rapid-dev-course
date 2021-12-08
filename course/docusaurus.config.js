@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TLDR Zilliqa DApp Course',
-  tagline: '"Everything-You-Should-Know" for Zilliqa DApp Development (TLDR)',
+  tagline: 'Quick Short Guide for Zilliqa DApp Development (TLDR)',
   url: 'https://teye.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
