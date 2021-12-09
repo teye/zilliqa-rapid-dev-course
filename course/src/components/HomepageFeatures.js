@@ -5,7 +5,7 @@ import styles from './HomepageFeatures.module.css';
 const FeatureList = [
   {
     title: 'Chapter 1: Scilla',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('../../static/img/undraw_font_kwpk.svg').default,
     description: (
       <>
         Scilla is the smart contract language in Zilliqa.<br/>Learn more about Maps, Events, Errors, Custom ADTs and Remote State Reads.
@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'Chapter 2: Zilliqa API & ZilliqaJS',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('../../static/img/undraw_server_cluster_jwwq.svg').default,
     description: (
       <>
         ZilliqaJS is a Javascript library which contains various functions to interact with the Zilliqa blockchain. Underlying ZilliqaJS, the SDK calls Zilliqa API to interact with the blockchain.
@@ -25,7 +25,7 @@ const FeatureList = [
   },
   {
     title: 'Chapter 3: React DApp Development',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('../../static/img/undraw_programmer_re_owql.svg').default,
     description: (
       <>
         Combining the knowledge of Scilla and ZilliqaJS, understand how everything links together when developing a frontend framework.

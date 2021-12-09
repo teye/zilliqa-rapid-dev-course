@@ -44,7 +44,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Home',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -54,13 +54,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Course',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
+            label: 'Developing DApp on Zilliqa',
           },
         ],
       },
@@ -68,6 +62,9 @@ const config = {
         style: 'dark',
         links: [],
         copyright: `Copyright © ${new Date().getFullYear()}. Built with Docusaurus.`,
+      },
+      colorMode: {
+        defaultMode: 'dark',
       },
       prism: {
         theme: lightCodeTheme,

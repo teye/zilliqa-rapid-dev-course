@@ -8,6 +8,8 @@ So far, in Chapter 1, we covered Scilla; Zilliqa's smart contract langauge. In C
 
 In this final section of the TLDR course, we will walk-through the steps to develop a simple React DApp that will combine all our knowledge from the previous chapters. This DApp will demonstrate how to fetch contract state and rendered it on the UI and also calling transitions with buttons.
 
+## React + ZilliqaJS
+
 #### Step 1
 
 First, we are going to create a sample react app
@@ -83,7 +85,7 @@ npm install @zilliqa-js/zilliqa
 
 Edit `App.js` and add the following code to create a new state variable:
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 import { useState } from 'react';
 import './App.css';
 
@@ -109,7 +111,7 @@ The `data` variable is going to store our `token_owners`.
 
 Next, let's import the Zilliqa module.
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 import { useState } from 'react';
 import './App.css';
 
@@ -156,7 +158,7 @@ Next, we have to call `fetchTokenOwners()` when the page load initially.
 
 Import `useEffect` and add the following code to `App.js`:
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -226,7 +228,7 @@ Next, we can render the data to show on the UI.
 
 Replace the following code in the `return (...)` section in `App.js`:
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 <header className="App-header">
 <h1>Cryptomon</h1>
 <p>A crypto-currency sample react app</p>
@@ -250,7 +252,7 @@ Replace the following code in the `return (...)` section in `App.js`:
 
 Run the DApp, it should display the token IDs and owners:
 
-![Owners](./screenshots/main.png)
+![Owners](./screenshots/owners.png)
 
 #### Step 7
 
@@ -258,7 +260,7 @@ Next, we are going to add a button that will invoke `AddCryptoMon` using Zilliqa
 
 Add a `button` code under `return (...)` section in `App.js`:
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
   return (
     <div className="App">
       <header className="App-header">
@@ -291,7 +293,7 @@ The button will call a `onAddCryptoMon` handler function.
 
 Now, let's add the actual `AddCryptoMon` call as a new function.
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 // async function fetchTokenOwners() ...
 
 async function AddCryptoMon(token_id, address) {
@@ -345,7 +347,7 @@ The above code uses Zilliqa JS and reads the private key and contract address fr
 
 Next, we create a `.env` file:
 
-```bash title="/cryptomon/.env
+```bash title="/cryptomon/.env"
 REACT_APP_PRIVATE_KEY=my_private_key
 REACT_APP_WALLET_ADDRESS=0x_my_wallet_address
 REACT_APP_CRYPTOMON_ADDR=0x_contract_addr
@@ -353,7 +355,7 @@ REACT_APP_CRYPTOMON_ADDR=0x_contract_addr
 
 Now, return back to `App.js`. In the main `App()` function, we need to code the `onAddCryptoMon` handler that would invoke this `AddCryptoMon` function when users click on the button.
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 function App() {
     // state variables
 
@@ -385,7 +387,7 @@ The above onhandler code invokes `AddCryptoMon` and `fetchTokenOwners` to fetch 
 
 The full `App.js` should look like this:
 
-```javascript title="/cryptomon/src/App.js
+```javascript title="/cryptomon/src/App.js"
 import { useState, useEffect } from 'react';
 import './App.css';
 
@@ -567,3 +569,16 @@ You may download and run the full code [**sample project**](https://github.com/t
 The full code has additional features such as auto calculating the next available `token_id` and also disabling the button when it is adding the cryptomon. 
 
 Remember to set your `.env` file before running the project!
+
+
+## The End
+That's it! You have reached the end of this TLDR course! 
+
+Hope you have learnt something and continue to explore more on your own!
+
+#### Other Places For More Knowledge
+- [**Zilliqa Developer Portal**](https://dev.zilliqa.com/docs/dev/dev-started-introduction)
+- [**ZilPay Documentation**](https://zilpay.github.io/zilpay-docs/)
+- [**Zilliqa Javascript Examples**](https://github.com/Zilliqa/Zilliqa-JavaScript-Library-Examples)
+- [**Scilla Cookbook**](https://scilla-cookbook.org/)
+- [**Scilla Documentation**](https://scilla.readthedocs.io/_/downloads/en/latest/pdf/)
