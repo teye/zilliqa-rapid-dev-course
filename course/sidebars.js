@@ -45,8 +45,10 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'React DApp Development',
-      items: ['intro'],
+      label: 'Chapter 3: React DApp Development',
+      items: [
+        'react/react_zilliqa'
+      ],
     },
   ],
 };
