@@ -5,6 +5,10 @@ This repo will introduce various SDK, tools, contract writing and workflow to ge
 <br>
 _This repo is **NOT** affiliated with Zilliqa in anyway; all materials presented here are solely based on the author's understanding._
 
+## Course Website
+https://teye.github.io/zilliqa-tldr-dapp-course/
+
+
 ## Who is this course for?
 This quick course is designed for developers to focus on the essential parts to get an understanding how everything gels together from the contract to SDK to frontend, so that developers can quickly get started with coding a dApp on Zilliqa. Readers are assumed to have some basic understanding of Zilliqa (transactions, gas, etc), Scilla and Javascript (for frontend development).
 
