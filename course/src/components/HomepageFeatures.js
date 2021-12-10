@@ -25,7 +25,7 @@ const FeatureList = [
   },
   {
     title: 'Chapter 3: React DApp Development',
-    Svg: require('../../static/img/undraw_programmer_re_owql.svg').default,
+    Svg: require('../../static/img/undraw_proud_coder_7ain.svg').default,
     description: (
       <>
         Combining the knowledge of Scilla and ZilliqaJS, understand how everything links together when developing a frontend framework.

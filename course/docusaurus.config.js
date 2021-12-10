@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TLDR Zilliqa DApp Course',
-  tagline: 'Quick Short Guide for Zilliqa DApp Development (TLDR)',
+  tagline: 'Quick TLDR Guide for Zilliqa DApp Development',
   url: 'https://teye.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -46,8 +46,13 @@ const config = {
       navbar: {
         title: 'Home',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Site Logo',
+          src: 'img/hexagon.svg',
+          srcDark: 'img/hexagon_light.svg',
+          href: 'https://docusaurus.io/',
+          target: '_self',
+          width: 32,
+          height: 32,
         },
         items: [
           {
