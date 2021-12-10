@@ -25,7 +25,7 @@ A transition is a contract call which is similar to a function call in other lan
   end
 ```
 
-In the above example, `transition callA()` will output an event. An event in Scilla is something like `console.log()` in Javascript. For more information about events, see [**Events & Errors**](./scilla/events_errors).
+In the above example, `transition callA()` will output an event. An event in Scilla is something like `console.log()` in Javascript. For more information about events, see [**Events & Errors**](./events_errors).
 
 ## Procedures
 A procedure is defined by using the keyword: `procedure`.
